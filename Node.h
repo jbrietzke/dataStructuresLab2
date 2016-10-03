@@ -10,7 +10,7 @@ class Node
       void display();
       Node *getNextPtr();
       void setNextPtr(Node *);
-
+      Student *getStudent();
    private:
       Node *next;
       Student *studentPtr;

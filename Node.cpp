@@ -36,3 +36,8 @@ void Node::setNextPtr(Node *theNextPtr)
 {
    next = theNextPtr;
 }
+
+Student * Node::getStudent()
+{
+   return studentPtr;
+}
