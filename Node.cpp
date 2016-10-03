@@ -26,3 +26,13 @@ void Node::display()
 {
    cout << "We are displaying the student name: " << studentPtr->name << endl;
 }
+
+Node *Node::getNextPtr()
+{
+   return next;
+}
+
+void Node::setNextPtr(Node *theNextPtr)
+{
+   next = theNextPtr;
+}

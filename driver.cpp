@@ -45,10 +45,10 @@ int main()
             head = nptr;
          }else{
             curr = head;
-            while(curr->next != NULL){
-               curr = curr->next;
+            while(curr->getNextPtr() != NULL){
+               curr = curr->getNextPtr();
             }
-            curr->next = nptr;
+            curr->setNextPtr(nptr);
          }
       }
    }while(!isDone);
@@ -58,7 +58,7 @@ int main()
    while(curr != NULL)
    {
       curr->display();
-      curr = curr->next;
+      curr = curr->getNextPtr();
    }
    return 0;
 }
