@@ -30,7 +30,8 @@ int main()
    Node *newPointer;
    bool isDone = false;
    char item;
-   newPointer = NULL;
+   void display(Node *);
+   Node *append(Node *, Node *);
    // Creating our list
    do {
       cout << "Enter next item: ";
@@ -40,29 +41,41 @@ int main()
          isDone = true;
       }else{
          nptr = new Node(item);
-         if (head == NULL)
-         {
-            head = nptr;
-         }else{
-            curr = head;
-            while(curr->getNextPtr() != NULL){
-               curr = curr->getNextPtr();
-            }
-            curr->setNextPtr(nptr);
-         }
+         head = append(head, nptr);
       }
    }while(!isDone);
-
+   display(head);
    // displaying list
-   curr = head;
-   while(curr != NULL)
+
+   return 0;
+}
+
+// Curr is passed by value so we can mutilate it or not
+void display(Node *head)
+{
+   Node *curr = head;
+   while(curr)
    {
       curr->display();
       curr = curr->getNextPtr();
    }
-   return 0;
 }
 
+Node *append(Node *head, Node *nptr)
+{
+   Node *curr = head;
+   if (head == NULL)
+   {
+      head = nptr;
+   }else{
+      curr = head;
+      while(curr->getNextPtr() != NULL){
+         curr = curr->getNextPtr();
+      }
+      curr->setNextPtr(nptr);
+   }
+   return head;
+}
 
 /*
 Node curr;
