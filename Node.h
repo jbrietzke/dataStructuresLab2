@@ -8,12 +8,14 @@ class Node
       Node(char);
       ~Node();
       void display();
-      Node *getNextPtr();
       void setNextPtr(Node *);
+      Node *getNextPtr();
+      char getItem();
       Student *getStudent();
    private:
       Node *next;
       Student *studentPtr;
+      char item;
 };
 #endif
 

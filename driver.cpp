@@ -45,7 +45,7 @@ int main()
    }while(!isDone);
    display(head);
    deleteNode(head, 'b');
-   // displaying list
+   display(head);
 
    return 0;
 }
@@ -82,10 +82,25 @@ Node *append(Node *head, Node *nptr)
 void deleteNode(Node *head, char item)
 {
    Node *curr = head;
-   while(curr)
-   {
-      cout << "This is what is student: \n" << curr->getStudent() << endl;
+   Node *prev = NULL;
+   while(curr){
+      if(item == curr->getItem()){
+      break;
+      }
+      prev = curr;
       curr = curr->getNextPtr();
+   }
+
+   if(curr){
+      if(prev){
+         prev->setNextPtr(curr->getNextPtr());
+      }else{
+         head = curr->getNextPtr();
+      }
+
+      curr->setNextPtr(NULL);
+      delete curr;
+      curr = NULL;
    }
 }
 
