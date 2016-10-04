@@ -30,7 +30,7 @@ int main()
    Node *head = NULL;
    Node *nptr = NULL;
    bool isDone = false;
-   char item;
+   char item, itemInsertBefore;
 
    // Creating our list
    do {
@@ -45,12 +45,27 @@ int main()
       }
    }while(!isDone);
    display(head);
-   //head = deleteNode(head, 'b');
+   do
+   {
+      cout << "Would you like to delete('d') or insert('i') in the list or not('*'): ";
+      cin >> item;
+      if (item == 'd')
+      {
+         cout << "Enter the item you would like to delete: ";
+         cin >> item;
+         head = deleteNode(head, item);
+         display(head);
+      }else if (item == 'i')
+      {
+         cout << "Enter the item you would like to insert before and then the item you would like to insert: ";
+         cin >> itemInsertBefore >> item;
+         nptr = new Node(item);
+         head = insertNode(head, nptr, itemInsertBefore);
+         display(head);
+      }
+   }while(item != '*');
+   cout << "Thank you for using the application, here is your final report\n";
    display(head);
-   nptr = new Node('^');
-   head = insertNode(head, nptr, 'c');
-   display(head);
-
    return 0;
 }
 
