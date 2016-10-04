@@ -26,6 +26,7 @@ int main()
    void display(Node *);
    Node *deleteNode(Node *, char);
    Node *append(Node *, Node *);
+   Node *insertNode(Node *, Node *, char item);
    Node *head = NULL;
    Node *nptr = NULL;
    bool isDone = false;
@@ -45,6 +46,9 @@ int main()
    }while(!isDone);
    display(head);
    head = deleteNode(head, 'b');
+   display(head);
+   nptr = new Node('^');
+   head = insertNode(head, nptr, 'c');
    display(head);
 
    return 0;
@@ -83,19 +87,26 @@ Node *deleteNode(Node *head, char item)
 {
    Node *curr = head;
    Node *prev = NULL;
-   while(curr){
-      if(item == curr->getItem()){
+   bool didDelete = false;
+   while(curr)
+   {
+      if(item == curr->getItem())
+      {
          cout << "I get hit\n";
+         didDelete = true;
          break;
       }
       prev = curr;
       curr = curr->getNextPtr();
    }
 
-   if(curr){
-      if(prev){
+   if(curr)
+   {
+      if(prev)
+      {
          prev->setNextPtr(curr->getNextPtr());
-      }else{
+      }else
+      {
          head = curr->getNextPtr();
       }
 
@@ -103,9 +114,33 @@ Node *deleteNode(Node *head, char item)
       delete curr;
       curr = NULL;
    }
+   if (didDelete)
+   {
+      head = deleteNode(head, item);
+   }
    return head;
 }
-
+// We are inserting after this item
+Node *insertNode(Node *head, Node *newNode, char item)
+{
+   Node *curr = head;
+   Node *next = NULL;
+   while(curr)
+   {
+      if (curr->getItem() == item)
+      {
+         next = curr->getNextPtr();
+         curr->setNextPtr(newNode);
+         newNode->setNextPtr(next);
+         break;
+      }
+      else
+      {
+         curr = curr->getNextPtr();
+      }
+   }
+   return head;
+}
 /*
 We will need to return head or pass by reference once again
 Node *curr = head;
