@@ -8,9 +8,16 @@ class Node
       Node(char);
       ~Node();
       void display();
+      Node *getNextPtr();
+      void setNextPtr(Node *);
+      Student *getStudent();
+   private:
       Node *next;
       Student *studentPtr;
-   private:
-
 };
 #endif
+
+/* Now how we do it with private data member pointers
+We need to use get and set methods to interact with them
+
+*/

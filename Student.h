@@ -7,8 +7,9 @@ class Student
       Student();
       Student(char);
       ~Student();
-      char name;
+      char getName();
+      void setName(char);
    private:
-
+      char name;
 };
 #endif

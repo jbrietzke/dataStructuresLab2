@@ -14,3 +14,13 @@ Student::Student(char newName)
    cout << "We are in the newName student Constructor\n";
    name = newName;
 }
+
+char Student::getName()
+{
+   return name;
+}
+
+void Student::setName(char newName)
+{
+   name = newName;
+}

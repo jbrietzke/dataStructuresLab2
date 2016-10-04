@@ -24,5 +24,20 @@ Node::~Node()
 
 void Node::display()
 {
-   cout << "We are displaying the student name: " << studentPtr->name << endl;
+   cout << "We are displaying the student name: " << studentPtr->getName() << endl;
+}
+
+Node *Node::getNextPtr()
+{
+   return next;
+}
+
+void Node::setNextPtr(Node *theNextPtr)
+{
+   next = theNextPtr;
+}
+
+Student * Node::getStudent()
+{
+   return studentPtr;
 }
