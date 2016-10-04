@@ -45,7 +45,7 @@ int main()
       }
    }while(!isDone);
    display(head);
-   head = deleteNode(head, 'b');
+   //head = deleteNode(head, 'b');
    display(head);
    nptr = new Node('^');
    head = insertNode(head, nptr, 'c');
@@ -125,18 +125,35 @@ Node *insertNode(Node *head, Node *newNode, char item)
 {
    Node *curr = head;
    Node *next = NULL;
+   Node *prev = NULL;
    while(curr)
    {
       if (curr->getItem() == item)
       {
-         next = curr->getNextPtr();
-         curr->setNextPtr(newNode);
-         newNode->setNextPtr(next);
+         cout << "Am I getting hit either\n";
          break;
       }
       else
       {
+         prev = curr;
          curr = curr->getNextPtr();
+      }
+   }
+   if (curr)
+   {
+      cout << "Do I even get hit\n";
+      if (curr == head)
+      {
+         cout << "The curr == head\n";
+         next = head;
+         head = newNode;
+         newNode->setNextPtr(next);
+      }
+      else
+      {
+         cout << "The else is hit\n";
+         prev->setNextPtr(newNode);
+         newNode->setNextPtr(curr);
       }
    }
    return head;
