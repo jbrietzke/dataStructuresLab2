@@ -24,7 +24,7 @@ int main()
    //So we set it to NULL so we know what is there
    // using  a prev pointer is very useful in implementation
    void display(Node *);
-   void deleteNode(Node *, char);
+   Node *deleteNode(Node *, char);
    Node *append(Node *, Node *);
    Node *head = NULL;
    Node *nptr = NULL;
@@ -44,7 +44,7 @@ int main()
       }
    }while(!isDone);
    display(head);
-   deleteNode(head, 'b');
+   head = deleteNode(head, 'b');
    display(head);
 
    return 0;
@@ -79,13 +79,14 @@ Node *append(Node *head, Node *nptr)
 }
 
 //delete by item type
-void deleteNode(Node *head, char item)
+Node *deleteNode(Node *head, char item)
 {
    Node *curr = head;
    Node *prev = NULL;
    while(curr){
       if(item == curr->getItem()){
-      break;
+         cout << "I get hit\n";
+         break;
       }
       prev = curr;
       curr = curr->getNextPtr();
@@ -102,6 +103,7 @@ void deleteNode(Node *head, char item)
       delete curr;
       curr = NULL;
    }
+   return head;
 }
 
 /*
