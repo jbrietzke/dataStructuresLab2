@@ -124,7 +124,6 @@ Node *deleteNode(Node *head, char item)
 Node *insertNode(Node *head, Node *newNode, char item)
 {
    Node *curr = head;
-   Node *next = NULL;
    Node *prev = NULL;
    while(curr)
    {
@@ -145,9 +144,9 @@ Node *insertNode(Node *head, Node *newNode, char item)
       if (curr == head)
       {
          cout << "The curr == head\n";
-         next = head;
+         prev = head;
          head = newNode;
-         newNode->setNextPtr(next);
+         newNode->setNextPtr(prev);
       }
       else
       {
