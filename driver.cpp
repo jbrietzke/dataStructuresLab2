@@ -92,7 +92,6 @@ Node *deleteNode(Node *head, char item)
    {
       if(item == curr->getItem())
       {
-         cout << "I get hit\n";
          didDelete = true;
          break;
       }
@@ -129,7 +128,6 @@ Node *insertNode(Node *head, Node *newNode, char item)
    {
       if (curr->getItem() == item)
       {
-         cout << "Am I getting hit either\n";
          break;
       }
       else
@@ -140,17 +138,14 @@ Node *insertNode(Node *head, Node *newNode, char item)
    }
    if (curr)
    {
-      cout << "Do I even get hit\n";
       if (curr == head)
       {
-         cout << "The curr == head\n";
          prev = head;
          head = newNode;
          newNode->setNextPtr(prev);
       }
       else
       {
-         cout << "The else is hit\n";
          prev->setNextPtr(newNode);
          newNode->setNextPtr(curr);
       }
