@@ -1,15 +1,20 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
+using namespace std;
 class Student
 {
    public:
       Student();
       Student(char);
+      Student(string, string);
+      Student(string);
       ~Student();
-      char getName();
-      void setName(char);
+      string getLastName();
+      string getFirstName();
+      void displayLastName();
+      void displayFull();
    private:
-      char name;
+      string firstName, lastName;
 };
 #endif

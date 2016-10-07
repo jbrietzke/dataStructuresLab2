@@ -6,21 +6,46 @@ using namespace std;
 Student::Student()
 {
    cout << "We are in the Student default Constructor\n";
-   name = '&';
+   firstName = "John";
+   lastName = "Doe";
 }
 
 Student::Student(char newName)
 {
    cout << "We are in the newName student Constructor\n";
-   name = newName;
+   lastName = "blah";
 }
 
-char Student::getName()
+Student::Student(string fName, string lName)
 {
-   return name;
+   cout << "We are in the names student Constructor\n";
+   firstName = fName;
+   lastName = lName;
 }
 
-void Student::setName(char newName)
+Student::Student(string lName)
 {
-   name = newName;
+   cout << "Only last name Constructor\n";
+   firstName = "Blah";
+   lastName = lName;
+}
+
+string Student::getLastName()
+{
+   return lastName;
+}
+
+string Student::getFirstName()
+{
+   return firstName;
+}
+
+void Student::displayLastName()
+{
+   cout << lastName << endl;
+}
+
+void Student::displayFull()
+{
+   cout << firstName << ", " << lastName << endl;
 }

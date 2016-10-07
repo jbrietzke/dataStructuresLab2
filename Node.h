@@ -6,16 +6,15 @@ class Node
    public:
       Node();
       Node(char);
+      Node(Student *);
       ~Node();
       void display();
       void setNextPtr(Node *);
       Node *getNextPtr();
-      char getItem();
       Student *getStudent();
    private:
       Node *next;
       Student *studentPtr;
-      char item;
 };
 #endif
 

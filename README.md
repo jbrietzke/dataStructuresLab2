@@ -6,4 +6,4 @@ The linkedlist is written in the driver program
 
 The Node class has its own Header file
 
-This version of LinkedList handles appending, deleting, and traversing
+This version of LinkedList handles appending, deleting, inserting, and traversing

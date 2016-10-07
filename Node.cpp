@@ -6,7 +6,6 @@ Node::Node()
 {
    cout << "We are in the default constructor";
    next = NULL;
-   item = '&';
    studentPtr = new Student();
 }
 
@@ -14,8 +13,14 @@ Node::Node(char x)
 {
    cout << "We are in the Node character constructor: " << x << endl;
    next = NULL;
-   item = '&';
    studentPtr = new Student(x);
+}
+
+Node::Node(Student *newStudent)
+{
+   cout << "Hello\n";
+   next = NULL;
+   studentPtr = newStudent;
 }
 
 Node::~Node()
@@ -26,7 +31,7 @@ Node::~Node()
 
 void Node::display()
 {
-   cout << "We are displaying the student name: " << studentPtr->getName() << endl;
+   studentPtr->displayFull();
 }
 
 Node *Node::getNextPtr()
@@ -42,9 +47,4 @@ void Node::setNextPtr(Node *theNextPtr)
 Student * Node::getStudent()
 {
    return studentPtr;
-}
-
-char Node::getItem()
-{
-   return item;
 }
