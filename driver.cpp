@@ -5,11 +5,8 @@ We need to always create a separate pointer to traverse the list
 Curr is industry best practice because it is clear
 Prev is also important because keeps track of previous
 
-
-
 In the deault constructor the Node's next pointer must be initialized to NULL
 When creating the new Node is does not know what is pointing to
-
 */
 
 #include <iostream>

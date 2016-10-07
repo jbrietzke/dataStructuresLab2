@@ -18,8 +18,3 @@ class Student
       string firstName, lastName;
 };
 #endif
-
-/* We create a new student pointer and pass that to the new Node.
-So Student is created before new node
-
-*/
