@@ -24,23 +24,26 @@ int main()
    //So we set it to NULL so we know what is there
    // using  a prev pointer is very useful in implementation
    void display(Node *);
-   Node *deleteNode(Node *, char);
+   Node *deleteNode(Node *, Student *);
    Node *append(Node *, Node *);
-   Node *insertNode(Node *, Node *, char item);
+   Node *insertNode(Node *, Node *, string);
    Node *head = NULL;
    Node *nptr = NULL;
+   Student *studentPtr = NULL;
    bool isDone = false;
-   char item, itemInsertBefore;
+   char item;
+   string firstName, lastName, itemInsertBefore;
 
    // Creating our list
    do {
-      cout << "Enter next item: ";
-      cin >> item;
-      if (item == '*')
+      cout << "Enter next student (first name then last name): ";
+      cin >> firstName >> lastName;
+      studentPtr = new Student(firstName, lastName);
+      if (firstName == "*" || lastName == "*")
       {
          isDone = true;
       }else{
-         nptr = new Node(item);
+         nptr = new Node(studentPtr);
          head = append(head, nptr);
       }
    }while(!isDone);
@@ -51,15 +54,17 @@ int main()
       cin >> item;
       if (item == 'd')
       {
-         cout << "Enter the item you would like to delete: ";
-         cin >> item;
-         head = deleteNode(head, item);
+         cout << "Enter the last name of the person you would like to delete: ";
+         cin >> lastName;
+         studentPtr = new Student(lastName);
+         head = deleteNode(head, studentPtr);
          display(head);
       }else if (item == 'i')
       {
-         cout << "Enter the item you would like to insert before and then the item you would like to insert: ";
-         cin >> itemInsertBefore >> item;
-         nptr = new Node(item);
+         cout << "Enter the last name you would like to insert before and then the person you would like to insert: ";
+         cin >> itemInsertBefore >> firstName >> lastName;
+         studentPtr = new Student(firstName, lastName);
+         nptr = new Node(studentPtr);
          head = insertNode(head, nptr, itemInsertBefore);
          display(head);
       }
@@ -98,14 +103,14 @@ Node *append(Node *head, Node *nptr)
 }
 
 //delete by item type
-Node *deleteNode(Node *head, char item)
+Node *deleteNode(Node *head, Student *deleteableStudent)
 {
    Node *curr = head;
    Node *prev = NULL;
    bool didDelete = false;
    while(curr)
    {
-      if(item == curr->getItem())
+      if(deleteableStudent->getLastName() == curr->getStudent()->getLastName())
       {
          didDelete = true;
          break;
@@ -130,18 +135,18 @@ Node *deleteNode(Node *head, char item)
    }
    if (didDelete)
    {
-      head = deleteNode(head, item);
+      head = deleteNode(head, deleteableStudent);
    }
    return head;
 }
 // We are inserting after this item
-Node *insertNode(Node *head, Node *newNode, char item)
+Node *insertNode(Node *head, Node *newNode, string name)
 {
    Node *curr = head;
    Node *prev = NULL;
    while(curr)
    {
-      if (curr->getItem() == item)
+      if (curr->getStudent()->getLastName() == name)
       {
          break;
       }
@@ -167,30 +172,4 @@ Node *insertNode(Node *head, Node *newNode, char item)
    }
    return head;
 }
-/*
-We will need to return head or pass by reference once again
-Node *curr = head;
-*prev = NULL;
-while(curr){
-   if(item == curr->getItem()){
-   break;
-   }
-   prev = curr;
-   curr = curr -> getNextPtr();
-}
 
-if(curr){
-   if(prev){
-      prev->setNextPtr(curr ->getNextPtr());
-   }else{
-      head = curr->getNextPtr();
-   }
-
-   curr -> nextPtr(NULL);
-   delete curr;
-   curr = NULL;
-}
-
-Make Head global possibly
-Don't worry about student class
-*/
