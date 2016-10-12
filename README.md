@@ -1,5 +1,9 @@
 # dataStructuresLab2
 
+Jackson Brietkze
+10/12/16
+Professor Papadakis
+
 This lab's goal is to have a working single LinkedList working 
 
 The linkedlist is written in the driver program
