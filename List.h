@@ -11,6 +11,7 @@ public:
    void append(Node *);
    void display();
    void deleteNode(Node *);
+   Node *getHead() const;
    int getNumNodes();
    bool isEmpty();
 private:

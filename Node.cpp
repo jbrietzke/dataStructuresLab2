@@ -22,7 +22,6 @@ Node::Node(Student *newStudent)
 
 Node::~Node()
 {
-   cout << "We are in the Node destructor\n";
    delete next;
    delete studentPtr;
    next = NULL;
@@ -44,7 +43,8 @@ void Node::setNextPtr(Node *theNextPtr)
    next = theNextPtr;
 }
 
-Student * Node::getStudent()
+Student *Node::getStudent()
 {
    return studentPtr;
 }
+
