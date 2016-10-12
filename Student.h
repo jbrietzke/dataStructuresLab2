@@ -15,6 +15,6 @@ class Student
       void displayLastName();
       void displayFull();
    private:
-      string firstName, lastName;
+      string *firstName, *lastName;
 };
 #endif
