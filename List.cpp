@@ -1,3 +1,7 @@
+/*
+Here are the List Class' Method Definitions
+*/
+
 #include "List.h"
 
 List::List()
@@ -5,10 +9,11 @@ List::List()
    head = NULL;
    numNodes = 0;
 }
-
+// Makes a deap copy of the list passed to it
 List::List(List const &copyingList)
 {
-
+   head = NULL;
+   numNodes = 0;
    Node *holder = NULL;
    Node *curr = copyingList.getHead();
    Student *newStudent = NULL;
@@ -19,12 +24,8 @@ List::List(List const &copyingList)
       append(holder);
       curr = curr->getNextPtr();
    }
-
-   // traverse list copyingList
-   // create a copyof each node
-   // append new node to new list
 }
-
+// Clears Node on the heap
 List::~List()
 {
    delete head;
