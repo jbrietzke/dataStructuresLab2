@@ -6,10 +6,11 @@ class List
 {
 public:
    List();
-   List(List copyingList);
+   List(List const &);
    ~List();
-   void append();
+   void append(Node *);
    void display();
+   void deleteNode(Node *);
 private:
    Node *head;
    int numNodes;
