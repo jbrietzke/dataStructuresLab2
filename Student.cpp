@@ -30,6 +30,15 @@ Student::Student(string lName)
    lastName = new string(lName);
 }
 
+Student::~Student()
+{
+   cout << "We are in the student deconstructor\n";
+   delete firstName;
+   delete lastName;
+   firstName = NULL;
+   lastName = NULL;
+}
+
 string Student::getLastName()
 {
    return *lastName;

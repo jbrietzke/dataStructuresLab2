@@ -22,7 +22,11 @@ Node::Node(Student *newStudent)
 
 Node::~Node()
 {
+   cout << "We are in the Node destructor\n";
+   delete next;
+   delete studentPtr;
    next = NULL;
+   studentPtr = NULL;
 }
 
 void Node::display()

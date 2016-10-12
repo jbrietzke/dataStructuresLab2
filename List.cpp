@@ -35,6 +35,7 @@ void List::append(Node *newNode)
       }
       curr->setNextPtr(newNode);
    }
+   numNodes++;
 }
 
 void List::display()
