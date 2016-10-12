@@ -22,7 +22,10 @@ Node::Node(Student *newStudent)
 
 Node::~Node()
 {
+   delete next;
+   delete studentPtr;
    next = NULL;
+   studentPtr = NULL;
 }
 
 void Node::display()
@@ -40,7 +43,8 @@ void Node::setNextPtr(Node *theNextPtr)
    next = theNextPtr;
 }
 
-Student * Node::getStudent()
+Student *Node::getStudent()
 {
    return studentPtr;
 }
+

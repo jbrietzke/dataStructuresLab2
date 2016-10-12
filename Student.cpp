@@ -5,47 +5,51 @@ using namespace std;
 
 Student::Student()
 {
-   cout << "We are in the Student default Constructor\n";
-   firstName = "John";
-   lastName = "Doe";
+   firstName = new string("John");
+   lastName = new string("Doe");
 }
 
 Student::Student(char newName)
 {
-   cout << "We are in the newName student Constructor\n";
-   lastName = "blah";
+   lastName = new string("Blah");
 }
 
 Student::Student(string fName, string lName)
 {
-   cout << "We are in the names student Constructor\n";
-   firstName = fName;
-   lastName = lName;
+   firstName = new string(fName);
+   lastName = new string(lName);
 }
 
 Student::Student(string lName)
 {
-   cout << "Only last name Constructor\n";
-   firstName = "Blah";
-   lastName = lName;
+   firstName = new string("Blah");
+   lastName = new string(lName);
+}
+
+Student::~Student()
+{
+   delete firstName;
+   delete lastName;
+   firstName = NULL;
+   lastName = NULL;
 }
 
 string Student::getLastName()
 {
-   return lastName;
+   return *lastName;
 }
 
 string Student::getFirstName()
 {
-   return firstName;
+   return *firstName;
 }
 
 void Student::displayLastName()
 {
-   cout << lastName << endl;
+   cout << *lastName << endl;
 }
 
 void Student::displayFull()
 {
-   cout << firstName << ", " << lastName << endl;
+   cout << *firstName << ", " << *lastName << endl;
 }
