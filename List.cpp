@@ -32,6 +32,7 @@ void List::append(Node *newNode)
 
 void List::display()
 {
+   cout << "We are in the display method\n";
    Node *curr = head;
    while(curr)
    {
@@ -43,4 +44,36 @@ void List::display()
 void List::deleteNode(Node *toBeDeletedNode)
 {
    cout << "We are in the delete method\n";
+   Node *curr = head;
+   Node *prev = NULL;
+   bool didDelete = false;
+   while(curr)
+   {
+      if(toBeDeletedNode->getStudent()->getLastName() == curr->getStudent()->getLastName())
+      {
+         didDelete = true;
+         break;
+      }
+      prev = curr;
+      curr = curr->getNextPtr();
+   }
+
+   if(curr)
+   {
+      if(prev)
+      {
+         prev->setNextPtr(curr->getNextPtr());
+      }else
+      {
+         head = curr->getNextPtr();
+      }
+
+      curr->setNextPtr(NULL);
+      delete curr;
+      curr = NULL;
+   }
+   if (didDelete)
+   {
+      this->deleteNode(toBeDeletedNode);
+   }
 }
