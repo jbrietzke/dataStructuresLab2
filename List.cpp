@@ -14,6 +14,13 @@ List::List(List const &copyingList)
    // append new node to new list
 }
 
+List::~List()
+{
+   cout << "We are in the destructor\n";
+   delete head;
+   head = NULL;
+}
+
 void List::append(Node *newNode)
 {
    cout << "We are in the append method\n";
@@ -76,4 +83,14 @@ void List::deleteNode(Node *toBeDeletedNode)
    {
       this->deleteNode(toBeDeletedNode);
    }
+}
+
+int List::getNumNodes()
+{
+   return numNodes;
+}
+
+bool List::isEmpty()
+{
+   return (head == NULL) ? true:false;
 }
