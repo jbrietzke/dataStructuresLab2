@@ -1,6 +1,10 @@
-Script started on Wed Oct 12 18:23:25 2016
-[?1034hbash-3.2$ cat ReadME[K[K[K[K[KEADME.md
+Script started on Wed Oct 12 18:24:32 2016
+[?1034hbash-3.2$ cat README.md
 # dataStructuresLab2
+
+Jackson Brietkze
+10/12/16
+Professor Papadakis
 
 This lab's goal is to have a working single LinkedList working 
 
@@ -15,7 +19,379 @@ Student Class.
 
 Pointers are used throughout for dynamic memory and the destructors clean up the 
 heap mess once the program is finished. 
+bash-3.2$ cat List.h
+/*
+This is the List Class Header File
+Here the declarations are made for the List class
+*/
+#ifndef LIST_H
+#define LIST_H
+
+#include "Node.h"
+class List
+{
+public:
+   List();
+   List(List const &);
+   ~List();
+   void append(Node *);
+   void display();
+   void deleteNode(Node *);
+   Node *getHead() const;
+   int getNumNodes();
+   bool isEmpty();
+private:
+   Node *head;
+   int numNodes;
+};
+
+#endif
+bash-3.2$ cat List.cpp 
+/*
+Here are the List Class' Method Definitions
+*/
+
+#include "List.h"
+
+List::List()
+{
+   head = NULL;
+   numNodes = 0;
+}
+// Makes a deap copy of the list passed to it
+List::List(List const &copyingList)
+{
+   head = NULL;
+   numNodes = 0;
+   Node *holder = NULL;
+   Node *curr = copyingList.getHead();
+   Student *newStudent = NULL;
+   while(curr != NULL)
+   {
+      newStudent = new Student(curr->getStudent()->getFirstName(), curr->getStudent()->getLastName());
+      holder = new Node(newStudent);
+      append(holder);
+      curr = curr->getNextPtr();
+   }
+}
+// Clears Node on the heap
+List::~List()
+{
+   delete head;
+   head = NULL;
+}
+
+void List::append(Node *newNode)
+{
+   Node *curr = NULL;
+   curr = head;
+   if (head == NULL)
+   {
+      head = newNode;
+   }else{
+      //curr = head;
+      while(curr->getNextPtr() != NULL){
+         curr = curr->getNextPtr();
+      }
+      curr->setNextPtr(newNode);
+   }
+   numNodes++;
+}
+
+void List::display()
+{
+   Node *curr = head;
+   while(curr)
+   {
+      curr->display();
+      curr = curr->getNextPtr();
+   }
+}
+
+void List::deleteNode(Node *toBeDeletedNode)
+{
+   Node *curr = head;
+   Node *prev = NULL;
+   bool didDelete = false;
+   while(curr)
+   {
+      if(toBeDeletedNode->getStudent()->getLastName() == curr->getStudent()->getLastName())
+      {
+         didDelete = true;
+         break;
+      }
+      prev = curr;
+      curr = curr->getNextPtr();
+   }
+
+   if(curr)
+   {
+      if(prev)
+      {
+         prev->setNextPtr(curr->getNextPtr());
+      }else
+      {
+         head = curr->getNextPtr();
+      }
+
+      curr->setNextPtr(NULL);
+      delete curr;
+      curr = NULL;
+   }
+   if (didDelete)
+   {
+      deleteNode(toBeDeletedNode);
+   }
+}
+
+int List::getNumNodes()
+{
+   return numNodes;
+}
+
+bool List::isEmpty()
+{
+   return (head == NULL) ? true:false;
+}
+
+Node *List::getHead() const
+{
+   return head;
+}
+bash-3.2$ cat Node.h
+#ifndef NODE_H
+#define NODE_H
+#include "Student.h"
+class Node
+{
+   public:
+      Node();
+      Node(char);
+      Node(Student *);
+      ~Node();
+      void display();
+      void setNextPtr(Node *);
+      Node *getNextPtr();
+      Student *getStudent();
+   private:
+      Node *next;
+      Student *studentPtr;
+};
+#endif
+
+/* Now how we do it with private data member pointers
+We need to use get and set methods to interact with them
+
+*/
+bash-3.2$ cat Node.cpp 
+#include "Node.h"
+#include <iostream>
+using namespace std;
+
+Node::Node()
+{
+   next = NULL;
+   studentPtr = new Student();
+}
+
+Node::Node(char x)
+{
+   next = NULL;
+   studentPtr = new Student(x);
+}
+
+Node::Node(Student *newStudent)
+{
+   next = NULL;
+   studentPtr = newStudent;
+}
+
+Node::~Node()
+{
+   delete next;
+   delete studentPtr;
+   next = NULL;
+   studentPtr = NULL;
+}
+
+void Node::display()
+{
+   studentPtr->displayFull();
+}
+
+Node *Node::getNextPtr()
+{
+   return next;
+}
+
+void Node::setNextPtr(Node *theNextPtr)
+{
+   next = theNextPtr;
+}
+
+Student *Node::getStudent()
+{
+   return studentPtr;
+}
+
+bash-3.2$ cat Student.cpp 
+#include <iostream>
+#include "Student.h"
+using namespace std;
+
+
+Student::Student()
+{
+   firstName = new string("John");
+   lastName = new string("Doe");
+}
+
+Student::Student(char newName)
+{
+   lastName = new string("Blah");
+}
+
+Student::Student(string fName, string lName)
+{
+   firstName = new string(fName);
+   lastName = new string(lName);
+}
+
+Student::Student(string lName)
+{
+   firstName = new string("Blah");
+   lastName = new string(lName);
+}
+
+Student::~Student()
+{
+   delete firstName;
+   delete lastName;
+   firstName = NULL;
+   lastName = NULL;
+}
+
+string Student::getLastName()
+{
+   return *lastName;
+}
+
+string Student::getFirstName()
+{
+   return *firstName;
+}
+
+void Student::displayLastName()
+{
+   cout << *lastName << endl;
+}
+
+void Student::displayFull()
+{
+   cout << *firstName << ", " << *lastName << endl;
+}
+bash-3.2$ cat Student.h
+#ifndef STUDENT_H
+#define STUDENT_H
+
+using namespace std;
+class Student
+{
+   public:
+      Student();
+      Student(char);
+      Student(string, string);
+      Student(string);
+      ~Student();
+      string getLastName();
+      string getFirstName();
+      void displayLastName();
+      void displayFull();
+   private:
+      string *firstName, *lastName;
+};
+#endif
+bash-3.2$ cat linkedDriver.cpp 
+/*
+This is the driver program for the LinkedList
+Here an initial list is created, added to, and then copied
+It is a deep copy two separate instances of the lists
+*/
+
+#include <iostream>
+#include "Node.cpp"
+#include "Student.cpp"
+#include "List.cpp"
+
+int main(int argc, char const *argv[])
+{
+   List *mainList = new List();
+   List *copyList = NULL;
+   Node *nptr = NULL;
+   Student *newStudentPtr = NULL;
+   bool isValid = true;
+   char toDelete;
+   string fName, lName;
+   do
+   {
+      cout << "Enter names of students and *'s when you're done: \n";
+      cin >> fName >> lName;
+      if (fName == "*" || lName == "*")
+      {
+         isValid = false;
+      }else{
+         newStudentPtr = new Student(fName,lName);
+         nptr = new Node(newStudentPtr);
+         mainList->append(nptr);
+      }
+   }while(isValid);
+   mainList->display();
+   copyList = new List(*mainList);
+   do{
+      cout << "Do you want to delete any students (y/n): ";
+      cin >> toDelete;
+      if (toDelete == 'y')
+      {
+         cout << "Enter students name you want to delete: ";
+         cin >> fName >> lName;
+         newStudentPtr = new Student(fName, lName);
+         nptr = new Node(newStudentPtr);
+         mainList->deleteNode(nptr);
+      }
+   }while(toDelete == 'y');
+
+   cout << "This is the new list:\n";
+   mainList->display();
+   cout << "This is the original list:\n";
+   copyList->display();
+   delete mainList;
+   mainList = NULL;
+   return 0;
+}
+bash-3.2$ g++ linkedDriver.cpp 
+bash-3.2$ ./a.out
+Enter names of students and *'s when you're done: 
+Jackson Brooks
+Enter names of students and *'s when you're done: 
+Eric Gagne
+Enter names of students and *'s when you're done: 
+Robert Kraft
+Enter names of students and *'s when you're done: 
+* *
+Jackson, Brooks
+Eric, Gagne
+Robert, Kraft
+Do you want to delete any students (y/n): y
+Enter students name you want to delete: Eric Gagne
+Do you want to delete any students (y/n): n
+This is the new list:
+Jackson, Brooks
+Robert, Kraft
+This is the original list:
+Jackson, Brooks
+Eric, Gagne
+Robert, Kraft
 bash-3.2$ exit
 exit
 
-Script done on Wed Oct 12 18:23:44 2016
+Script done on Wed Oct 12 18:26:22 2016
