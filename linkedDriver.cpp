@@ -16,6 +16,7 @@ int main(int argc, char const *argv[])
    List *copyList = NULL;
    Node *nptr = NULL;
    Student *newStudentPtr = NULL;
+   Node *insertedStudent = NULL;
    bool isValid = true;
    char toDelete;
    string fName, lName;
@@ -44,6 +45,21 @@ int main(int argc, char const *argv[])
          newStudentPtr = new Student(fName, lName);
          nptr = new Node(newStudentPtr);
          mainList->deleteNode(nptr);
+      }
+   }while(toDelete == 'y');
+   do{
+      cout << "Do you want to insert any students (y/n): ";
+      cin >> toDelete;
+      if (toDelete == 'y')
+      {
+         cout << "Enter students you want to insert and the student to whom they go before: ";
+         cin >> fName >> lName;
+         newStudentPtr = new Student(fName, lName);
+         cin >> fName >> lName;
+         nptr = new Node(newStudentPtr);
+         newStudentPtr = new Student(fName, lName);
+         insertedStudent = new Node(newStudentPtr);
+         mainList->insertNode(nptr, insertedStudent);
       }
    }while(toDelete == 'y');
 

@@ -95,6 +95,39 @@ void List::deleteNode(Node *toBeDeletedNode)
    }
 }
 
+void List::insertNode(Node *nodeToBeInsertedBefore, Node *nodeAfter)
+{
+   cout << "insertingNode";
+   Node *curr = head;
+   Node *prev = NULL;
+   while(curr)
+   {
+      if (curr->getStudent()->getLastName() == nodeAfter->getStudent()->getLastName())
+      {
+         break;
+      }
+      else
+      {
+         prev = curr;
+         curr = curr->getNextPtr();
+      }
+   }
+   if (curr)
+   {
+      if (curr == head)
+      {
+         prev = head;
+         head = nodeToBeInsertedBefore;
+         nodeToBeInsertedBefore->setNextPtr(prev);
+      }
+      else
+      {
+         prev->setNextPtr(nodeToBeInsertedBefore);
+         nodeToBeInsertedBefore->setNextPtr(curr);
+      }
+   }
+}
+
 int List::getNumNodes()
 {
    return numNodes;
