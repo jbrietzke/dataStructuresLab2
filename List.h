@@ -15,7 +15,10 @@ public:
    void append(Node *);
    void display();
    void deleteNode(Node *);
+   void insertNode(Node *, Node *);
+   void orderByAge();
    Node *getHead() const;
+   Node *getOldest();
    int getNumNodes();
    bool isEmpty();
 private:

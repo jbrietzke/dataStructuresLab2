@@ -19,7 +19,7 @@ List::List(List const &copyingList)
    Student *newStudent = NULL;
    while(curr != NULL)
    {
-      newStudent = new Student(curr->getStudent()->getFirstName(), curr->getStudent()->getLastName());
+      newStudent = new Student(curr->getStudent()->getFirstName(), curr->getStudent()->getLastName(), curr->getStudent()->getAge());
       holder = new Node(newStudent);
       append(holder);
       curr = curr->getNextPtr();
@@ -95,6 +95,86 @@ void List::deleteNode(Node *toBeDeletedNode)
    }
 }
 
+void List::insertNode(Node *nodeToBeInsertedBefore, Node *nodeAfter)
+{
+   cout << "insertingNode";
+   Node *curr = head;
+   Node *prev = NULL;
+   while(curr)
+   {
+      if (curr->getStudent()->getLastName() == nodeAfter->getStudent()->getLastName())
+      {
+         break;
+      }
+      else
+      {
+         prev = curr;
+         curr = curr->getNextPtr();
+      }
+   }
+   if (curr)
+   {
+      if (curr == head)
+      {
+         prev = head;
+         head = nodeToBeInsertedBefore;
+         nodeToBeInsertedBefore->setNextPtr(prev);
+      }
+      else
+      {
+         prev->setNextPtr(nodeToBeInsertedBefore);
+         nodeToBeInsertedBefore->setNextPtr(curr);
+      }
+   }else
+   {
+      append(nodeToBeInsertedBefore);
+   }
+}
+// This is implementing a Bubble Sort to sort oldest to youngest
+void List::orderByAge()
+{
+   Node *curr = NULL;
+   Node *next = NULL;
+   Node *prev = NULL;
+   Node *holder = NULL;
+   bool toSortAgain = false;
+   int counter = 0;
+   curr = head;
+   next = head->getNextPtr();
+   while(next != NULL)
+   {
+      if (curr->getStudent()->getAge() < next->getStudent()->getAge() && head == curr)
+      {
+         holder = next->getNextPtr();
+         next->setNextPtr(curr);
+         head = next;
+         curr->setNextPtr(holder);
+         toSortAgain = true;
+         prev = next;
+         next = curr->getNextPtr();
+      }else if(curr->getStudent()->getAge() < next->getStudent()->getAge())
+      {
+         holder = next->getNextPtr();
+         next->setNextPtr(curr);
+         prev->setNextPtr(next);
+         curr->setNextPtr(holder);
+         toSortAgain = true;
+         prev = next;
+         next = curr->getNextPtr();
+      }else
+      {
+         prev = curr;
+         curr = curr->getNextPtr();
+         next = next->getNextPtr();
+      }
+      counter++;
+   }
+   if (toSortAgain)
+   {
+      orderByAge();
+   }
+}
+
 int List::getNumNodes()
 {
    return numNodes;
@@ -108,4 +188,19 @@ bool List::isEmpty()
 Node *List::getHead() const
 {
    return head;
+}
+
+Node *List::getOldest()
+{
+   Node *largest = new Node(head->getStudent());
+   Node *curr = head->getNextPtr();
+   while(curr)
+   {
+      if (curr->getStudent()->getAge() > largest->getStudent()->getAge())
+      {
+         largest = new Node(curr->getStudent());
+      }
+      curr = curr->getNextPtr();
+   }
+   return largest;
 }

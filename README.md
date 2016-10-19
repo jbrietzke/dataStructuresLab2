@@ -1,8 +1,9 @@
 # dataStructuresLab2
 
 Jackson Brietkze
-10/12/16
+10/19/16
 Professor Papadakis
+Lab 3-C
 
 This lab's goal is to have a working single LinkedList working 
 
@@ -17,3 +18,7 @@ Student Class.
 
 Pointers are used throughout for dynamic memory and the destructors clean up the 
 heap mess once the program is finished. 
+
+The list is sorted by age using a Bubble Sort in the orderByAge method
+
+It can construct a list from either the keyboard or a designated file
