@@ -19,16 +19,17 @@ int main(int argc, char const *argv[])
    Node *insertedStudent = NULL;
    bool isValid = true;
    char toDelete;
+   int age;
    string fName, lName;
    do
    {
-      cout << "Enter names of students and *'s when you're done: \n";
-      cin >> fName >> lName;
+      cout << "Enter names of students, age,  and *'s when you're done: \n";
+      cin >> fName >> lName >> age;
       if (fName == "*" || lName == "*")
       {
          isValid = false;
       }else{
-         newStudentPtr = new Student(fName,lName);
+         newStudentPtr = new Student(fName,lName, age);
          nptr = new Node(newStudentPtr);
          mainList->append(nptr);
       }
@@ -40,9 +41,9 @@ int main(int argc, char const *argv[])
       cin >> toDelete;
       if (toDelete == 'y')
       {
-         cout << "Enter students name you want to delete: ";
-         cin >> fName >> lName;
-         newStudentPtr = new Student(fName, lName);
+         cout << "Enter students name and age you want to delete: ";
+         cin >> fName >> lName >> age;
+         newStudentPtr = new Student(fName, lName, age);
          nptr = new Node(newStudentPtr);
          mainList->deleteNode(nptr);
       }
@@ -53,16 +54,16 @@ int main(int argc, char const *argv[])
       if (toDelete == 'y')
       {
          cout << "Enter students you want to insert and the student to whom they go before: ";
-         cin >> fName >> lName;
-         newStudentPtr = new Student(fName, lName);
-         cin >> fName >> lName;
+         cin >> fName >> lName >> age;
+         newStudentPtr = new Student(fName, lName, age);
+         cin >> fName >> lName >> age;
          nptr = new Node(newStudentPtr);
-         newStudentPtr = new Student(fName, lName);
+         newStudentPtr = new Student(fName, lName, age);
          insertedStudent = new Node(newStudentPtr);
          mainList->insertNode(nptr, insertedStudent);
       }
    }while(toDelete == 'y');
-
+   mainList->orderByAge();
    cout << "This is the new list:\n";
    mainList->display();
    cout << "This is the original list:\n";

@@ -19,7 +19,7 @@ List::List(List const &copyingList)
    Student *newStudent = NULL;
    while(curr != NULL)
    {
-      newStudent = new Student(curr->getStudent()->getFirstName(), curr->getStudent()->getLastName());
+      newStudent = new Student(curr->getStudent()->getFirstName(), curr->getStudent()->getLastName(), curr->getStudent()->getAge());
       holder = new Node(newStudent);
       append(holder);
       curr = curr->getNextPtr();
@@ -125,6 +125,56 @@ void List::insertNode(Node *nodeToBeInsertedBefore, Node *nodeAfter)
          prev->setNextPtr(nodeToBeInsertedBefore);
          nodeToBeInsertedBefore->setNextPtr(curr);
       }
+   }else
+   {
+      append(nodeToBeInsertedBefore);
+   }
+}
+
+void List::orderByAge()
+{
+   cout << "We are ordering now\n";
+   Node *curr = NULL;
+   Node *next = NULL;
+   Node *prev = NULL;
+   Node *holder = NULL;
+   bool toSortAgain = false;
+   int counter = 0;
+   curr = head;
+   next = head->getNextPtr();
+   while(next != NULL)
+   {
+      if (curr->getStudent()->getAge() < next->getStudent()->getAge() && head == curr)
+      {
+         cout << "This gets hit\n";
+         holder = next->getNextPtr();
+         next->setNextPtr(curr);
+         head = next;
+         curr->setNextPtr(holder);
+         toSortAgain = true;
+         prev = next;
+         next = curr->getNextPtr();
+      }else if(curr->getStudent()->getAge() < next->getStudent()->getAge())
+      {
+         cout << "This also gets hits\n";
+         holder = next->getNextPtr();
+         next->setNextPtr(curr);
+         prev->setNextPtr(next);
+         curr->setNextPtr(holder);
+         toSortAgain = true;
+         prev = next;
+         next = curr->getNextPtr();
+      }else
+      {
+         prev = curr;
+         curr = curr->getNextPtr();
+         next = next->getNextPtr();
+      }
+      counter++;
+   }
+   if (toSortAgain)
+   {
+      orderByAge();
    }
 }
 
@@ -141,4 +191,19 @@ bool List::isEmpty()
 Node *List::getHead() const
 {
    return head;
+}
+
+Node *List::getOldest()
+{
+   Node *largest = new Node(head->getStudent());
+   Node *curr = head->getNextPtr();
+   while(curr)
+   {
+      if (curr->getStudent()->getAge() > largest->getStudent()->getAge())
+      {
+         largest = new Node(curr->getStudent());
+      }
+      curr = curr->getNextPtr();
+   }
+   return largest;
 }

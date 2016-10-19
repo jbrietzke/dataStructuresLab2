@@ -7,6 +7,7 @@ Student::Student()
 {
    firstName = new string("John");
    lastName = new string("Doe");
+   age = new int(99);
 }
 
 Student::Student(char newName)
@@ -14,10 +15,11 @@ Student::Student(char newName)
    lastName = new string("Blah");
 }
 
-Student::Student(string fName, string lName)
+Student::Student(string fName, string lName, int theirAge)
 {
    firstName = new string(fName);
    lastName = new string(lName);
+   age = new int(theirAge);
 }
 
 Student::Student(string lName)
@@ -51,5 +53,10 @@ void Student::displayLastName()
 
 void Student::displayFull()
 {
-   cout << *firstName << ", " << *lastName << endl;
+   cout << *firstName << ", " << *lastName << "," << *age << endl;
+}
+
+int Student::getAge()
+{
+   return *age;
 }
