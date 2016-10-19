@@ -2,6 +2,8 @@
 This is the driver program for the LinkedList
 Here an initial list is created, added to, and then copied
 It is a deep copy two separate instances of the lists
+It can order the inputted students via age
+It allows for the taking in of a file
 */
 
 #include <iostream>

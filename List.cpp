@@ -130,7 +130,7 @@ void List::insertNode(Node *nodeToBeInsertedBefore, Node *nodeAfter)
       append(nodeToBeInsertedBefore);
    }
 }
-
+// This is implementing a Bubble Sort to sort oldest to youngest
 void List::orderByAge()
 {
    Node *curr = NULL;
