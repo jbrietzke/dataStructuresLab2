@@ -12,6 +12,7 @@ class Student
       ~Student();
       string getLastName();
       string getFirstName();
+      string getAllInformation();
       int getAge();
       void displayLastName();
       void displayFull();

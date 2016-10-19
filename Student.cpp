@@ -60,3 +60,10 @@ int Student::getAge()
 {
    return *age;
 }
+
+string Student::getAllInformation()
+{
+   string stringAge = to_string(*age);
+   string total = *firstName + " " + *lastName + " " + stringAge + " ";
+   return total;
+}

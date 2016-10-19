@@ -133,7 +133,6 @@ void List::insertNode(Node *nodeToBeInsertedBefore, Node *nodeAfter)
 
 void List::orderByAge()
 {
-   cout << "We are ordering now\n";
    Node *curr = NULL;
    Node *next = NULL;
    Node *prev = NULL;
@@ -146,7 +145,6 @@ void List::orderByAge()
    {
       if (curr->getStudent()->getAge() < next->getStudent()->getAge() && head == curr)
       {
-         cout << "This gets hit\n";
          holder = next->getNextPtr();
          next->setNextPtr(curr);
          head = next;
@@ -156,7 +154,6 @@ void List::orderByAge()
          next = curr->getNextPtr();
       }else if(curr->getStudent()->getAge() < next->getStudent()->getAge())
       {
-         cout << "This also gets hits\n";
          holder = next->getNextPtr();
          next->setNextPtr(curr);
          prev->setNextPtr(next);
